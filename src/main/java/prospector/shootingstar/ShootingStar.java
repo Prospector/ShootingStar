@@ -1,35 +1,27 @@
 package prospector.shootingstar;
 
 
+import prospector.shootingstar.model.ModelCompound;
+import prospector.shootingstar.model.ModelMethods;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static prospector.shootingstar.ModelMethods.registerItemModel;
-import static prospector.shootingstar.ModelMethods.setIgnoreStatesStateMapper;
+import static prospector.shootingstar.model.ModelMethods.registerItemModel;
 
 public class ShootingStar {
-    protected static List<ModelInfo> modelList = new ArrayList<>();
+    protected static List<ModelCompound> modelList = new ArrayList<>();
 
-    /**
-     * Adds a block or item model to the "to be registered" list
-     *
-     * @param modelInfo
-     */
-    public static void registerModel(ModelInfo modelInfo) {
-        modelList.add(modelInfo);
+    public static void registerModel(ModelCompound modelCompound) {
+        modelList.add(modelCompound);
     }
 
-    /**
-     * Registers models for a given modid
-     *
-     * @param modid Sets what modid to register models for
-     */
     public static void registerModels(String modid) {
-        for (ModelInfo model : modelList) {
-            if (model.getModid().equals(modid)) {
-                registerItemModel(model.getItem(), model.getMeta(), model.getBlockStatePath());
-                if (model.isBlock() && model.getIgnoreProperties().length > 0) {
-                    setIgnoreStatesStateMapper(model.getBlock(), model.getIgnoreProperties());
+        for (ModelCompound compound : modelList) {
+            if (compound.getModid().equals(modid)) {
+                registerItemModel(compound.getItem(), compound.getMeta(), compound.getBlockStatePath());
+                if (compound.isBlock() && !compound.getBlockStatePath().isEmpty()) {
+                    ModelMethods.setBlockStateMapper(compound.getBlock(), compound.getBlockStatePath(), compound.getIgnoreProperties());
                 }
             }
         }

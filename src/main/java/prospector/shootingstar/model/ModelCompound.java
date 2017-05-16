@@ -1,10 +1,10 @@
-package prospector.shootingstar;
+package prospector.shootingstar.model;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
 
-public class ModelInfo {
+public class ModelCompound {
     private String blockstatePath;
     private IProperty[] ignoreProperties = null;
     private String modid;
@@ -12,7 +12,7 @@ public class ModelInfo {
     private Item item = null;
     private int meta;
 
-    public ModelInfo(String modid, Block block, int meta, String blockstatePath, IProperty... ignoreProperties) {
+    public ModelCompound(String modid, Block block, int meta, String blockstatePath, IProperty... ignoreProperties) {
         this.modid = modid;
         this.block = block;
         this.blockstatePath = blockstatePath;
@@ -20,34 +20,34 @@ public class ModelInfo {
         this.meta = meta;
     }
 
-    public ModelInfo(String modid, Block block, int meta, IProperty... ignoreProperties) {
+    public ModelCompound(String modid, Block block, int meta, IProperty... ignoreProperties) {
         this(modid, block, meta, "", ignoreProperties);
     }
 
-    public ModelInfo(String modid, Block block, IProperty... ignoreProperties) {
+    public ModelCompound(String modid, Block block, IProperty... ignoreProperties) {
         this(modid, block, 0, "", ignoreProperties);
     }
 
-    public ModelInfo(String modid, Block block, String blockstatePath, IProperty... ignoreProperties) {
+    public ModelCompound(String modid, Block block, String blockstatePath, IProperty... ignoreProperties) {
         this(modid, block, 0, blockstatePath, ignoreProperties);
     }
 
-    public ModelInfo(String modid, Item item, int meta, String blockstatePath) {
+    public ModelCompound(String modid, Item item, int meta, String blockstatePath) {
         this.modid = modid;
         this.item = item;
         this.blockstatePath = blockstatePath;
         this.meta = meta;
     }
 
-    public ModelInfo(String modid, Item item, int meta) {
+    public ModelCompound(String modid, Item item, int meta) {
         this(modid, item, meta, "");
     }
 
-    public ModelInfo(String modid, Item item) {
+    public ModelCompound(String modid, Item item) {
         this(modid, item, 0, "");
     }
 
-    public ModelInfo(String modid, Item item, String blockstatePath) {
+    public ModelCompound(String modid, Item item, String blockstatePath) {
         this(modid, item, 0, blockstatePath);
     }
 

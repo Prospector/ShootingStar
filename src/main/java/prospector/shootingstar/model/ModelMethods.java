@@ -1,13 +1,17 @@
-package prospector.shootingstar;
+package prospector.shootingstar.model;
 
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+
+import java.util.Map;
 
 public class ModelMethods {
     public static void registerItemModel(Item item) {
@@ -48,7 +52,21 @@ public class ModelMethods {
         ModelLoader.setCustomStateMapper(block, mapper);
     }
 
-    public static void setIgnoreStatesStateMapper(Block block, IProperty... properties) {
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(properties).build());
+    public static void setBlockStateMapper(Block block, IProperty... ignoredProperties) {
+        setBlockStateMapper(block, "", ignoredProperties);
+    }
+
+    public static void setBlockStateMapper(Block block, String path, IProperty... ignoredProperties) {
+        final String slash = !path.isEmpty() ? "/" : "";
+        ModelLoader.setCustomStateMapper(block, new DefaultStateMapper() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                Map<IProperty<?>, Comparable<?>> map = Maps.<IProperty<?>, Comparable<?>>newLinkedHashMap(state.getProperties());
+                for (IProperty<?> iproperty : ignoredProperties) {
+                    map.remove(iproperty);
+                }
+                return new ModelResourceLocation(new ResourceLocation(block.getRegistryName().getResourceDomain(), path + slash + block.getRegistryName().getResourcePath()), this.getPropertyString(map));
+            }
+        });
     }
 }

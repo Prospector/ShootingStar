@@ -7,11 +7,11 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = mcver + "-" + modver
+version = mcver + "-" + modver + "-CustomBuild"
 
 def ENV = System.getenv()
 if (ENV.BUILD_NUMBER) {
-	version = "-" + "${System.getenv().BUILD_NUMBER}"
+	version = mcver + "-" + modver + "-" + "${System.getenv().BUILD_NUMBER}"
 }
 
 def ver = version
