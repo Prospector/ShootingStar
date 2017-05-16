@@ -41,3 +41,55 @@ repositories {
 dependencies {
 
 }
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			//This is used when the build is done on a slave node
+			if (project.hasProperty('mavenPass')) {
+				println 'Uploading to remote Maven Repo'
+				repository(url: "http://mavenupload.modmuss50.me/") {
+					authentication(userName: "buildslave", password: project.getProperty('mavenPass'))
+				}
+			} else {
+				//this is when the build is executed on the master node
+				println 'Uploading to local Maven Repo'
+				repository(url: "file:///var/www/maven/")
+			}
+			pom {
+				groupId = project.group
+				version = project.version
+				artifactId = project.archivesBaseName
+				project {
+					name project.archivesBaseName
+					packaging 'jar'
+					description 'ShootingStar'
+					url 'https://github.com/ProfessorProspector/ShootingStar'
+					scm {
+						url 'https://github.com/ProfessorProspector/ShootingStar'
+						connection 'scm:git:git@github.com:ProfessorProspector/ShootingStar.git'
+						developerConnection 'scm:git:git@github.com:ProfessorProspector/ShootingStar.git'
+					}
+					issueManagement {
+						system 'github'
+						url 'https://github.com/ProfessorProspector/ShootingStar/issues'
+					}
+					licenses {
+						license {
+							name 'License'
+							url 'https://raw.githubusercontent.com/ProfessorProspector/ShootingStar/master/LICENSE.md'
+							distribution 'repo'
+						}
+					}
+					developers {
+						developer {
+							id 'ProfessorProspector'
+							name 'Prospector'
+							roles {role 'developer'}
+						}
+					}
+				}
+			}
+		}
+	}
+}
