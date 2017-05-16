@@ -1,0 +1,91 @@
+package prospector.shootingstar;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.item.Item;
+
+public class ModelInfo {
+    private String blockstatePath;
+    private IProperty[] ignoreProperties = null;
+    private String modid;
+    private Block block = null;
+    private Item item = null;
+    private int meta;
+
+    public ModelInfo(String modid, Block block, int meta, String blockstatePath, IProperty... ignoreProperties) {
+        this.modid = modid;
+        this.block = block;
+        this.blockstatePath = blockstatePath;
+        this.ignoreProperties = ignoreProperties;
+        this.meta = meta;
+    }
+
+    public ModelInfo(String modid, Block block, int meta, IProperty... ignoreProperties) {
+        this(modid, block, meta, "", ignoreProperties);
+    }
+
+    public ModelInfo(String modid, Block block, IProperty... ignoreProperties) {
+        this(modid, block, 0, "", ignoreProperties);
+    }
+
+    public ModelInfo(String modid, Block block, String blockstatePath, IProperty... ignoreProperties) {
+        this(modid, block, 0, blockstatePath, ignoreProperties);
+    }
+
+    public ModelInfo(String modid, Item item, int meta, String blockstatePath) {
+        this.modid = modid;
+        this.item = item;
+        this.blockstatePath = blockstatePath;
+        this.meta = meta;
+    }
+
+    public ModelInfo(String modid, Item item, int meta) {
+        this(modid, item, meta, "");
+    }
+
+    public ModelInfo(String modid, Item item) {
+        this(modid, item, 0, "");
+    }
+
+    public ModelInfo(String modid, Item item, String blockstatePath) {
+        this(modid, item, 0, blockstatePath);
+    }
+
+    public String getModid() {
+        return modid;
+    }
+
+    public Block getBlock() {
+        return block;
+    }
+
+    public Item getItem() {
+        if (isBlock())
+            return Item.getItemFromBlock(block);
+        return item;
+    }
+
+    public boolean isBlock() {
+        if (block != null)
+            return true;
+        return false;
+    }
+
+    public boolean isItem() {
+        if (item != null)
+            return true;
+        return false;
+    }
+
+    public String getBlockStatePath() {
+        return blockstatePath;
+    }
+
+    public IProperty[] getIgnoreProperties() {
+        return ignoreProperties;
+    }
+
+    public int getMeta() {
+        return meta;
+    }
+}
