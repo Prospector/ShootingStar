@@ -1,7 +1,7 @@
 buildscript {
 	repositories {
 		jcenter()
-		maven { name = "MinecraftForge" url = "http://files.minecraftforge.net/maven" }
+		maven { url = "http://files.minecraftforge.net/maven" }
 		maven { name = "Modmuss50" url = "http://maven.modmuss50.me/" }
 	}
 	dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT' }
