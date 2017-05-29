@@ -1,7 +1,5 @@
 package prospector.shootingstar.version;
 
-import prospector.traverse.core.TraverseConstants;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,9 +21,9 @@ public class VersionUtils {
     }
 
     public static Version getVersion(String version) {
-        if (TraverseConstants.MOD_VERSION.matches("(\\d+\\.\\d+\\.+\\d-\\d+\\.\\d+\\.\\d+-\\d)")) {
+        if (version.matches("(\\d+\\.\\d+\\.+\\d-\\d+\\.\\d+\\.\\d+-\\d)")) {
             Pattern pattern = Pattern.compile("-(\\d+)\\.(\\d+)\\.(\\d+)-");
-            Matcher matcher = pattern.matcher(TraverseConstants.MOD_VERSION);
+            Matcher matcher = pattern.matcher(version);
             return new Version(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
         }
         return new Version(1, 0, 0);
