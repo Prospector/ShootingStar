@@ -4,8 +4,11 @@ buildscript {
 		maven { url = "http://files.minecraftforge.net/maven" }
 		maven { url = "http://maven.modmuss50.me/" }
 	}
-	dependencies { classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT' }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
