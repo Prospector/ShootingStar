@@ -35,6 +35,14 @@ public class ModelMethods {
         setMRL(item, meta, loc, "inventory");
     }
 
+    public static void registerItemModel(Item item, int meta, String path, String invVariant) {
+        String slash = "";
+        if (!path.isEmpty())
+            slash = "/";
+        ResourceLocation loc = new ResourceLocation(item.getRegistryName().getResourceDomain(), path + slash + item.getRegistryName().getResourcePath());
+        setMRL(item, meta, loc, invVariant);
+    }
+
     public static void registerBlockState(Item item, int meta, String path, String property, String variant) {
         registerBlockState(item, meta, path, property + "=" + variant);
     }

@@ -5,6 +5,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
 
 public class ModelCompound {
+    private String inventoryVariant = "inventory";
     private String blockstatePath;
     private IProperty[] ignoreProperties = null;
     private String modid;
@@ -49,6 +50,15 @@ public class ModelCompound {
 
     public ModelCompound(String modid, Item item, String blockstatePath) {
         this(modid, item, 0, blockstatePath);
+    }
+
+    public String getInventoryVariant() {
+        return inventoryVariant;
+    }
+
+    public ModelCompound setInvVariant(String variant) {
+        inventoryVariant = variant;
+        return this;
     }
 
     public String getModid() {
