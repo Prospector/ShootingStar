@@ -55,7 +55,10 @@ public class ShootingStar {
 
                 }
                 if (compound.isItem()) {
-                    registerItemModel(compound.getItem(), compound.getMeta(), compound.getBlockStatePath(), compound.getInventoryVariant());
+                    if (compound.getFileName().equals("shootingstar.undefinedfilename"))
+                        registerItemModel(compound.getItem(), compound.getMeta(), compound.getBlockStatePath(), compound.getInventoryVariant());
+                    else
+                        registerItemModel(compound.getItem(), compound.getMeta(), compound.getFileName(), compound.getBlockStatePath(), compound.getInventoryVariant());
                 }
             }
         }
