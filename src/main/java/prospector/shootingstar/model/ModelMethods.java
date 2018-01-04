@@ -13,6 +13,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.Map;
 
+@SuppressWarnings("MethodCallSideOnly")
 public class ModelMethods {
 	public static void registerItemModel(Item item) {
 		setMRL(item, 0, item.getRegistryName(), "inventory");
@@ -78,6 +79,24 @@ public class ModelMethods {
 					map.remove(iproperty);
 				}
 				return new ModelResourceLocation(new ResourceLocation(block.getRegistryName().getResourceDomain(), path + slash + fileName), this.getPropertyString(map));
+			}
+		});
+	}
+
+	public static void setBlockStateMapper(Block block, String variant) {
+		setBlockStateMapper(block, block.getRegistryName().getResourcePath(), variant);
+	}
+
+	public static void setBlockStateMapper(Block block, String blockstatePath, String variant) {
+		setBlockStateMapper(block, block.getRegistryName().getResourcePath(), blockstatePath, variant);
+	}
+
+	public static void setBlockStateMapper(Block block, String fileName, String path, String variant) {
+		final String slash = !path.isEmpty() ? "/" : "";
+		ModelLoader.setCustomStateMapper(block, new DefaultStateMapper() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return new ModelResourceLocation(new ResourceLocation(block.getRegistryName().getResourceDomain(), path + slash + fileName), variant);
 			}
 		});
 	}
