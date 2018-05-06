@@ -14,12 +14,16 @@ public class StarBlock extends Block {
 		this.modId = modId;
 		this.name = name;
 		setRegistryName(modId, name);
-		ShootingStar.registerModel(new ModelCompound(modId, this, "block").setInvVariant("normal"));
-
+		registerModel();
 	}
 
 	public StarBlock(String modId, String name) {
 		this(modId, name, Material.ROCK);
+	}
+
+	@Override
+	public String getUnlocalizedName() {
+		return "block." + modId + "." + name;
 	}
 
 	public String getModId() {
@@ -28,5 +32,9 @@ public class StarBlock extends Block {
 
 	public String getName() {
 		return name;
+	}
+
+	public void registerModel() {
+		ShootingStar.registerModel(new ModelCompound(modId, this, "block").setInvVariant("normal"));
 	}
 }

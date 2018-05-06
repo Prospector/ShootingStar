@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "shootingstar",
+    "name": "Shooting Star",
+    "description": "Prospector's lib mod",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/ProfessorProspector/ShootingStar",
+    "authorList": [
+      "Prospector"
+    ],
+    "credits": "",
+    "logoFile": "logo.png"
+  }
+]
